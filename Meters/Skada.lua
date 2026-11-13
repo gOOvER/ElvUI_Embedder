@@ -13,8 +13,9 @@ function SkadaAdapter:IsAvailable()
 	return EM:IsAddOnActive('Skada') and _G.Skada ~= nil
 end
 
-function SkadaAdapter:Embed(container, slotIndex)
+function SkadaAdapter:Embed(container, slotIndex, embedDB)
 	local Skada = _G.Skada
+	local E = unpack(_G.ElvUI)
 	if not Skada or not Skada.GetWindows then return end
 
 	local windows = Skada:GetWindows()
@@ -31,6 +32,21 @@ function SkadaAdapter:Embed(container, slotIndex)
 		db.background = db.background or {}
 		db.background.height = height - (db.enabletitle and (db.title and db.title.height or 20) or 0)
 		db.barslocked = true
+		if embedDB and embedDB.applySkin and E then
+			local tex = E.private and E.private.general and E.private.general.normTex
+			local font = E.db and E.db.general and E.db.general.font
+			if tex then
+				db.bartexture = tex
+				if db.title then db.title.texture = tex end
+			end
+			if font then
+				db.barfont = font
+				if db.title then db.title.font = font end
+			end
+			db.background.texture = 'ElvUI Blank'
+			db.background.bordertexture = 'None'
+			db.background.color = { r = 0, g = 0, b = 0, a = 0 }
+		end
 	end
 
 	local bg = win.bargroup
@@ -38,6 +54,7 @@ function SkadaAdapter:Embed(container, slotIndex)
 	bg:ClearAllPoints()
 	bg:SetPoint('TOPLEFT', container, 'TOPLEFT', 0, 0)
 	bg:SetPoint('BOTTOMRIGHT', container, 'BOTTOMRIGHT', 0, 0)
+	EM:ApplySkinTemplate(bg, embedDB)
 
 	if Skada.ApplySettings then
 		pcall(Skada.ApplySettings, Skada)

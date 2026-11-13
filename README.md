@@ -47,6 +47,7 @@
 
 - **Single & Dual Embed**: Show 1 meter across the whole chat panel or 2 meters side-by-side (e.g., `Details!` + `Details!` #2, or `Recount` + `Omen`) with adjustable split percentage and gap.
 - **Target Panel**: Anchor into **Right Chat** or **Left Chat**, either below the chat tab bar or covering the full panel.
+- **Optional ElvUI Skin**: Toggle `Apply ElvUI Skin` (with `Transparent` / `Default` template) to match embedded meter frames, fonts, and bar textures to your ElvUI theme.
 - **Right-Click Chat Toggle**: Right-click ElvUI's `RightChatToggleButton` to toggle the embedded meter without hiding your chat panel.
 - **Visibility Modes**: `Always Show`, `Only in Combat`, or `Only in Group / Instance`.
 - **Slash Commands**:

@@ -12,8 +12,9 @@ function OmenAdapter:IsAvailable()
 	return EM:IsAddOnActive('Omen') and _G.Omen ~= nil and _G.OmenAnchor ~= nil
 end
 
-function OmenAdapter:Embed(container)
+function OmenAdapter:Embed(container, _, db)
 	local Omen = _G.Omen
+	local E = unpack(_G.ElvUI)
 	local anchor = _G.OmenAnchor
 	if not Omen or not anchor then return end
 
@@ -32,6 +33,20 @@ function OmenAdapter:Embed(container)
 
 	if Omen.UpdateBackdrop then
 		pcall(Omen.UpdateBackdrop, Omen)
+	end
+	if db and db.applySkin then
+		EM:ApplySkinTemplate(Omen.BarList or anchor, db)
+		if Omen.Title then
+			EM:ApplySkinTemplate(Omen.Title, db)
+		end
+		if Omen.db and Omen.db.profile and E then
+			if Omen.db.profile.Bar and E.private and E.private.general and E.private.general.normTex then
+				Omen.db.profile.Bar.Texture = E.private.general.normTex
+			end
+			if Omen.UpdateBarLabelSettings then
+				pcall(Omen.UpdateBarLabelSettings, Omen)
+			end
+		end
 	end
 	anchor:Show()
 end

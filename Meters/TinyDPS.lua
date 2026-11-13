@@ -12,7 +12,7 @@ function TinyDPSAdapter:IsAvailable()
 	return EM:IsAddOnActive('TinyDPS') and _G.tdpsFrame ~= nil
 end
 
-function TinyDPSAdapter:Embed(container)
+function TinyDPSAdapter:Embed(container, _, db)
 	local frame = _G.tdpsFrame
 	if not frame then return end
 
@@ -27,6 +27,9 @@ function TinyDPSAdapter:Embed(container)
 
 	if _G.tdpsRefresh then
 		pcall(_G.tdpsRefresh)
+	end
+	if db and db.applySkin then
+		EM:ApplySkinTemplate(frame, db)
 	end
 	frame:Show()
 end

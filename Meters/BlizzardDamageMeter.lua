@@ -17,7 +17,7 @@ function BlizzardMeterAdapter:IsAvailable()
 	return GetWindowFrame(1) ~= nil
 end
 
-function BlizzardMeterAdapter:Embed(container, slotIndex)
+function BlizzardMeterAdapter:Embed(container, slotIndex, db)
 	local frame = GetWindowFrame(slotIndex)
 	if not frame then return end
 
@@ -29,6 +29,12 @@ function BlizzardMeterAdapter:Embed(container, slotIndex)
 	frame:ClearAllPoints()
 	frame:SetAllPoints(container)
 	frame:SetSize(width, height)
+	if db and db.applySkin then
+		if frame.NineSlice then frame.NineSlice:SetAlpha(0) end
+		if frame.Background then frame.Background:SetAlpha(0) end
+		if frame.Bg then frame.Bg:SetAlpha(0) end
+		EM:ApplySkinTemplate(frame, db)
+	end
 	frame:Show()
 
 	self.embedded[slotIndex] = frame

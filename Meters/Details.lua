@@ -13,8 +13,9 @@ function DetailsAdapter:IsAvailable()
 	return EM:IsAddOnActive('Details') and _G.Details ~= nil
 end
 
-function DetailsAdapter:Embed(container, slotIndex)
+function DetailsAdapter:Embed(container, slotIndex, db)
 	local Details = _G.Details
+	local E = unpack(_G.ElvUI)
 	if not Details or not Details.GetInstance then return end
 
 	local instance = Details:GetInstance(slotIndex)
@@ -49,6 +50,20 @@ function DetailsAdapter:Embed(container, slotIndex)
 
 	if instance.SetWindowSize then
 		pcall(instance.SetWindowSize, instance, width, height + topOffset)
+	end
+	if db and db.applySkin then
+		if instance.bgframe then
+			instance.bgframe:SetAlpha(0)
+		end
+		EM:ApplySkinTemplate(base, db)
+		local tex = E and E.private and E.private.general and E.private.general.normTex
+		local font = E and E.db and E.db.general and E.db.general.font
+		if instance.SetBarSettings and (tex or font) then
+			pcall(instance.SetBarSettings, instance, nil, tex, nil, nil, nil, nil, font)
+		end
+		if instance.RefreshBars then
+			pcall(instance.RefreshBars, instance, true)
+		end
 	end
 	if instance.LockInstance then
 		pcall(instance.LockInstance, instance, true)

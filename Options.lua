@@ -127,6 +127,23 @@ function EM:InsertOptions()
 				name = L["Transparent Backdrop"],
 				disabled = function() return not EM:GetDB().backdrop end,
 			},
+			skinHeader = {
+				type = 'header',
+				order = 34,
+				name = L["ElvUI Skin"],
+			},
+			applySkin = {
+				type = 'toggle',
+				order = 35,
+				name = L["Apply ElvUI Skin"],
+				desc = L["Style the embedded meter windows with ElvUI templates, borders, and statusbar textures."],
+			},
+			skinTransparent = {
+				type = 'toggle',
+				order = 36,
+				name = L["Transparent Skin"],
+				disabled = function() return not EM:GetDB().applySkin end,
+			},
 			refresh = {
 				type = 'execute',
 				order = 40,

@@ -35,6 +35,8 @@ P.embedder = {
 	visibility = 'always', -- 'always', 'combat', 'group'
 	backdrop = false,
 	transparent = true,
+	applySkin = false,
+	skinTransparent = true,
 	hidden = false,
 }
 
@@ -57,6 +59,16 @@ end
 
 function EM:GetDB()
 	return E.db.embedder or P.embedder
+end
+
+function EM:ApplySkinTemplate(frame, db)
+	if not frame or not db or not db.applySkin then return end
+	local template = db.skinTransparent and 'Transparent' or 'Default'
+	if frame.SetTemplate then
+		frame:SetTemplate(template)
+	elseif E.SetTemplate then
+		E:SetTemplate(frame, template)
+	end
 end
 
 function EM:ResolveAdapter(choice)
