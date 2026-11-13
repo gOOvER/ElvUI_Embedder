@@ -1,0 +1,37 @@
+local _, ns = ...
+if GetLocale() ~= "deDE" then return end
+
+local L = ns.L
+
+L["ElvUI Embedder"] = "ElvUI Embedder"
+L["Embed Mode"] = "Einbettungs-Modus"
+L["Disabled"] = "Deaktiviert"
+L["Single"] = "Einzeln"
+L["Dual"] = "Dual (Geteilt)"
+L["Target Chat Panel"] = "Ziel-Chatfenster"
+L["Right Chat"] = "Rechter Chat"
+L["Left Chat"] = "Linker Chat"
+L["Below Chat Tab"] = "Unterhalb der Chat-Reiter"
+L["Anchor the embedded meter below the chat tab bar instead of covering it."] = "Verankert das eingebettete Meter unterhalb der Chat-Reiter-Leiste, statt sie zu überdecken."
+L["Primary Meter"] = "Primäres Meter"
+L["Secondary Meter (Dual)"] = "Sekundäres Meter (Dual)"
+L["Auto-Detect"] = "Automatisch erkennen"
+L["None"] = "Keines"
+L["Left Window Width (%)"] = "Breite linkes Fenster (%)"
+L["Gap Between Windows"] = "Abstand zwischen Fenstern"
+L["Visibility"] = "Sichtbarkeit"
+L["Always Show"] = "Immer anzeigen"
+L["Only in Combat"] = "Nur im Kampf"
+L["Only in Group / Instance"] = "Nur in Gruppe / Instanz"
+L["Hide Out of Combat"] = "Außerhalb des Kampfes ausblenden"
+L["Backdrop"] = "Hintergrund"
+L["Show Container Backdrop"] = "Container-Hintergrund anzeigen"
+L["Transparent Backdrop"] = "Transparenter Hintergrund"
+L["Toggle Embedded Meter"] = "Eingebettetes Meter umschalten"
+L["Toggle Chat Frame"] = "Chatfenster umschalten"
+L["Left-Click:"] = "Linksklick:"
+L["Right-Click:"] = "Rechtsklick:"
+L["Force Refresh / Re-Embed"] = "Neu ausrichten / Aktualisieren"
+L["Active Meter:"] = "Aktives Meter:"
+L["No supported meter detected."] = "Kein unterstütztes Meter erkannt."
+

@@ -1,0 +1,37 @@
+local _, ns = ...
+
+local L = {}
+ns.L = L
+
+L["ElvUI Embedder"] = "ElvUI Embedder"
+L["Embed Mode"] = "Embed Mode"
+L["Disabled"] = "Disabled"
+L["Single"] = "Single"
+L["Dual"] = "Dual"
+L["Target Chat Panel"] = "Target Chat Panel"
+L["Right Chat"] = "Right Chat"
+L["Left Chat"] = "Left Chat"
+L["Below Chat Tab"] = "Below Chat Tab"
+L["Anchor the embedded meter below the chat tab bar instead of covering it."] = "Anchor the embedded meter below the chat tab bar instead of covering it."
+L["Primary Meter"] = "Primary Meter"
+L["Secondary Meter (Dual)"] = "Secondary Meter (Dual)"
+L["Auto-Detect"] = "Auto-Detect"
+L["None"] = "None"
+L["Left Window Width (%)"] = "Left Window Width (%)"
+L["Gap Between Windows"] = "Gap Between Windows"
+L["Visibility"] = "Visibility"
+L["Always Show"] = "Always Show"
+L["Only in Combat"] = "Only in Combat"
+L["Only in Group / Instance"] = "Only in Group / Instance"
+L["Hide Out of Combat"] = "Hide Out of Combat"
+L["Backdrop"] = "Backdrop"
+L["Show Container Backdrop"] = "Show Container Backdrop"
+L["Transparent Backdrop"] = "Transparent Backdrop"
+L["Toggle Embedded Meter"] = "Toggle Embedded Meter"
+L["Toggle Chat Frame"] = "Toggle Chat Frame"
+L["Left-Click:"] = "Left-Click:"
+L["Right-Click:"] = "Right-Click:"
+L["Force Refresh / Re-Embed"] = "Force Refresh / Re-Embed"
+L["Active Meter:"] = "Active Meter:"
+L["No supported meter detected."] = "No supported meter detected."
+

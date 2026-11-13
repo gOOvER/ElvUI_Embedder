@@ -1,0 +1,15 @@
+package-as: ElvUI_Embedder
+enable-nolib-creation: no
+enable-toc-creation: yes
+
+manual-changelog: CHANGELOG.md
+
+ignore:
+  - .github
+  - .gitignore
+  - .gitattributes
+  - .luacheckrc
+  - .pkgmeta
+  - CHANGELOG.md
+  - README.md
+  - LICENSE

@@ -1,0 +1,30 @@
+## Interface: 11508, 11509, 16001, 20505, 20506, 30405, 38002, 40402, 50503, 50504, 120001, 120007, 120100, 120105, 120107
+## Interface-Retail: 120001, 120007, 120100, 120105, 120107
+## Interface-Classic: 11508, 11509, 16001
+## Interface-BCC: 20505, 20506
+## Interface-Wrath: 30405, 38002
+## Interface-Cata: 40402
+## Interface-Mists: 50503, 50504
+## Title: |cff1784d1ElvUI|r |cffffffffEmbedder|r
+## Notes: Embeds Damage and Threat Meters (Details!, Skada, Recount, Omen, TinyDPS, Blizzard Damage Meter) cleanly into ElvUI Chat Panels.
+## Author: gOOvER
+## Version: 1.0.0
+## Dependencies: ElvUI
+## OptionalDeps: Details, Skada, Recount, Omen, TinyDPS
+## X-Category: ElvUI Plugins
+## X-License: GPL-3.0
+## X-Website: https://github.com/gOOvER/ElvUI_Embedder
+
+Locales\enUS.lua
+Locales\deDE.lua
+
+Core.lua
+Options.lua
+
+Meters\Details.lua
+Meters\Skada.lua
+Meters\Recount.lua
+Meters\Omen.lua
+Meters\TinyDPS.lua
+Meters\BlizzardDamageMeter.lua
+
