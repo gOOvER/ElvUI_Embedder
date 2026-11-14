@@ -55,3 +55,8 @@
   - `/embed toggle` — Toggle embedded meter visibility
   - `/embed refresh` — Force re-align / re-embed
 
+---
+
+## 🐛 Bug Reports & Feedback
+
+Found a bug or have a feature request? Please report it on the **[GitHub Issue Tracker](https://github.com/gOOvER/ElvUI_Embedder/issues)** (please include your WoW client version, addon version, and any Lua errors if available).
