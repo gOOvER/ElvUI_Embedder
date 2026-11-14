@@ -14,6 +14,7 @@
 ## X-Category: ElvUI Plugins
 ## X-License: GPL-3.0
 ## X-Website: https://github.com/gOOvER/ElvUI_Embedder
+## IconTexture: Interface\AddOns\ElvUI_Embedder\assets\icon.tga
 
 Locales\enUS.lua
 Locales\deDE.lua

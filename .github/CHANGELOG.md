@@ -21,4 +21,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Optional ElvUI Meter Skinning**: Added `Apply ElvUI Skin` (`applySkin`) and `Transparent Skin` (`skinTransparent`) options to style embedded `Details!`, `Blizzard Damage Meter`, `Skada`, `Recount`, `Omen`, and `TinyDPS` windows with ElvUI templates, borders, fonts, and statusbar textures.
 - **Visibility Modes**: Always Show, Only in Combat, and Only in Group / Instance.
 - **Slash Commands & Localization**: `/embed` & `/embedder` commands plus `enUS` and `deDE` locales.
+- **Addon Icon & Social Preview Banner**: Added `assets/icon.tga` (`## IconTexture`), `assets/logo.png`, and `.github/assets/social-banner.png`.
 
