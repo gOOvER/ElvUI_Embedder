@@ -89,13 +89,26 @@ function DetailsAdapter:Embed(container, slotIndex, db)
 
 		local tex = E and E.private and E.private.general and E.private.general.normTex
 		local font = E and E.db and E.db.general and E.db.general.font
-		if instance.row_info then
+		local LSM = LibStub and LibStub('LibSharedMedia-3.0', true)
+		if instance.row_info and LSM then
 			if tex then
-				instance.row_info.texture = tex
+				local texPath = LSM:Fetch('statusbar', tex, true)
+				if texPath then
+					instance.row_info.texture = tex
+					instance.row_info.texture_file = texPath
+				end
 			end
 			if font then
-				instance.row_info.font_face = font
+				local fontPath = LSM:Fetch('font', font, true)
+				if fontPath then
+					instance.row_info.font_face = font
+					instance.row_info.font_face_file = fontPath
+				end
 			end
+			instance.row_info.texture_class_colors = true
+		end
+		if instance.RefreshMainWindow then
+			pcall(instance.RefreshMainWindow, instance, true)
 		end
 		if instance.InstanceRefreshRows then
 			pcall(instance.InstanceRefreshRows, instance)
