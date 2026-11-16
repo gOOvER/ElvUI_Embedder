@@ -52,18 +52,45 @@ function DetailsAdapter:Embed(container, slotIndex, db)
 		pcall(instance.SetWindowSize, instance, width, height + topOffset)
 	end
 	if db and db.applySkin then
+		local targetSkin = db.skinTransparent and 'ElvUI Frame Style' or 'ElvUI Style II'
+		if Details.skins and Details.skins[targetSkin] and instance.ChangeSkin and instance.skin ~= targetSkin then
+			pcall(instance.ChangeSkin, instance, targetSkin)
+			-- Re-apply size/anchoring after ChangeSkin, since ChangeSkin may reset window frame geometry
+			base:SetParent(container)
+			base:ClearAllPoints()
+			base:SetPoint('TOPLEFT', container, 'TOPLEFT', 0, topOffset)
+			base:SetPoint('BOTTOMRIGHT', container, 'BOTTOMRIGHT', 0, 0)
+			base:SetSize(width, height + topOffset)
+			if instance.SetWindowSize then
+				pcall(instance.SetWindowSize, instance, width, height + topOffset)
+			end
+		end
 		if instance.bgframe then
 			instance.bgframe:SetAlpha(0)
 		end
-		EM:ApplySkinTemplate(base, db)
+		if base.SetBackdrop then
+			pcall(base.SetBackdrop, base, nil)
+		end
+		EM:ApplySkinTemplate(container, db)
+
 		local tex = E and E.private and E.private.general and E.private.general.normTex
 		local font = E and E.db and E.db.general and E.db.general.font
-		if instance.SetBarSettings and (tex or font) then
-			pcall(instance.SetBarSettings, instance, nil, tex, nil, nil, nil, nil, font)
+		if instance.row_info then
+			if tex then
+				instance.row_info.texture = tex
+			end
+			if font then
+				instance.row_info.font_face = font
+			end
+		end
+		if instance.InstanceRefreshRows then
+			pcall(instance.InstanceRefreshRows, instance)
 		end
 		if instance.RefreshBars then
 			pcall(instance.RefreshBars, instance, true)
 		end
+	elseif container.SetBackdrop then
+		container:SetBackdrop(nil)
 	end
 	if instance.LockInstance then
 		pcall(instance.LockInstance, instance, true)

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Details! ElvUI Skin Application (`Meters/Details.lua`)**: Switched `ApplySkinTemplate` from `instance.baseframe` (which clipped below Details' `-20px` toolbar and conflicted with Details' internal backdrop) to the slot `container`, cleared `base:SetBackdrop(nil)`, switched Details' skin to `ElvUI Frame Style` / `ElvUI Style II` when available, and synced `row_info.texture` / `font_face` via `InstanceRefreshRows()` instead of the non-existent `SetBarSettings`.
+
 ### Added
 - Initial release of **ElvUI Embedder** (`1.0.0`) under GPL-3.0.
 - **Single & Dual Chat Panel Embedding**: Embeds meters into ElvUI's Right or Left Chat Panel (with optional `Below Chat Tab` anchor, adjustable left/right split percentage, gap, and container backdrop).
