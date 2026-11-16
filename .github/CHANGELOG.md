@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
-- **Details! ElvUI Skin Application (`Meters/Details.lua`)**: Switched `ApplySkinTemplate` from `instance.baseframe` (which clipped below Details' `-20px` toolbar and conflicted with Details' internal backdrop) to the slot `container`, cleared `base:SetBackdrop(nil)`, switched Details' skin to `ElvUI Frame Style` / `ElvUI Style II` when available, and synced `row_info.texture` / `font_face` via `InstanceRefreshRows()` instead of the non-existent `SetBarSettings`.
+- **Details! Embed Sizing & ElvUI Skin (`Meters/Details.lua`)**: Matched `AddOnSkins` embed geometry (`-20px` top toolbar offset, `-13px` statusbar offset, `instance:SetSize(width, innerHeight)`, `SaveMainWindowPosition()` + `RestoreMainWindowPosition()`, and `Details_SwitchButtonFrame`/`DetailsRowFrame` frame levels) so Details! windows fit cleanly inside the ElvUI chat panel without overflowing above it, and applied `ElvUI Frame Style` / `ElvUI Style II` + container backdrop + `row_info` texture/font sync.
 
 ### Added
 - Initial release of **ElvUI Embedder** (`1.0.0`) under GPL-3.0.

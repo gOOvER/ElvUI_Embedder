@@ -28,43 +28,57 @@ function DetailsAdapter:Embed(container, slotIndex, db)
 		instance:EnableInstance()
 	end
 
+	instance._ElvUIEmbed = true
+
 	local base = instance.baseframe
 	local width = container:GetWidth()
 	local height = container:GetHeight()
 	if not width or width <= 0 or not height or height <= 0 then return end
 
-	local topOffset = 0
-	if instance.toolbar_side == 1 and not instance.hide_icon then
-		topOffset = -20
-	end
-
 	if instance.UngroupInstance then
 		pcall(instance.UngroupInstance, instance)
 	end
 
-	base:SetParent(container)
-	base:ClearAllPoints()
-	base:SetPoint('TOPLEFT', container, 'TOPLEFT', 0, topOffset)
-	base:SetPoint('BOTTOMRIGHT', container, 'BOTTOMRIGHT', 0, 0)
-	base:SetSize(width, height + topOffset)
-
-	if instance.SetWindowSize then
-		pcall(instance.SetWindowSize, instance, width, height + topOffset)
-	end
 	if db and db.applySkin then
 		local targetSkin = db.skinTransparent and 'ElvUI Frame Style' or 'ElvUI Style II'
 		if Details.skins and Details.skins[targetSkin] and instance.ChangeSkin and instance.skin ~= targetSkin then
 			pcall(instance.ChangeSkin, instance, targetSkin)
-			-- Re-apply size/anchoring after ChangeSkin, since ChangeSkin may reset window frame geometry
-			base:SetParent(container)
-			base:ClearAllPoints()
-			base:SetPoint('TOPLEFT', container, 'TOPLEFT', 0, topOffset)
-			base:SetPoint('BOTTOMRIGHT', container, 'BOTTOMRIGHT', 0, 0)
-			base:SetSize(width, height + topOffset)
-			if instance.SetWindowSize then
-				pcall(instance.SetWindowSize, instance, width, height + topOffset)
-			end
 		end
+	end
+
+	-- Match AddOnSkins Details embed geometry:
+	-- Details renders its 20px title/toolbar above baseframe (when growing down)
+	-- and a 13px statusbar below baseframe when enabled.
+	local topOffset = (instance.bars_grow_direction == 2) and -2 or -20
+	local effHeight = height
+	if instance.show_statusbar then
+		effHeight = effHeight - 13
+	end
+	local innerHeight = math.max(20, effHeight - 20)
+
+	base:ClearAllPoints()
+	base:SetParent(container)
+	base:SetFrameStrata(container:GetFrameStrata())
+	base:SetFrameLevel(container:GetFrameLevel())
+
+	if instance.SetSize then
+		pcall(instance.SetSize, instance, width, innerHeight)
+	elseif instance.SetWindowSize then
+		pcall(instance.SetWindowSize, instance, width, innerHeight)
+	else
+		base:SetSize(width, innerHeight)
+	end
+
+	base:SetPoint('TOPLEFT', container, 'TOPLEFT', 0, topOffset)
+
+	if instance.SaveMainWindowPosition then
+		pcall(instance.SaveMainWindowPosition, instance)
+	end
+	if instance.RestoreMainWindowPosition then
+		pcall(instance.RestoreMainWindowPosition, instance)
+	end
+
+	if db and db.applySkin then
 		if instance.bgframe then
 			instance.bgframe:SetAlpha(0)
 		end
@@ -92,6 +106,7 @@ function DetailsAdapter:Embed(container, slotIndex, db)
 	elseif container.SetBackdrop then
 		container:SetBackdrop(nil)
 	end
+
 	if instance.LockInstance then
 		pcall(instance.LockInstance, instance, true)
 	end
@@ -100,8 +115,17 @@ function DetailsAdapter:Embed(container, slotIndex, db)
 	else
 		base:Show()
 	end
-	if instance.SaveMainWindowPosition then
-		pcall(instance.SaveMainWindowPosition, instance)
+
+	local id = instance.GetId and instance:GetId() or slotIndex
+	local switchFrame = _G['Details_SwitchButtonFrame' .. tostring(id)]
+	if switchFrame then
+		switchFrame:SetParent(base)
+		switchFrame:SetFrameLevel(base:GetFrameLevel() + 3)
+	end
+	local rowFrame = _G['DetailsRowFrame' .. tostring(id)]
+	if rowFrame then
+		rowFrame:SetParent(base)
+		rowFrame:SetFrameLevel(base:GetFrameLevel() + 2)
 	end
 
 	self.embedded[slotIndex] = instance
@@ -121,4 +145,3 @@ function DetailsAdapter:OnHide()
 end
 
 EM:RegisterAdapter('Details', DetailsAdapter)
-
