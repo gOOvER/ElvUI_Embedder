@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **BenikUI & WindTools Compatibility (`Core.lua`)**: Added automatic `BuiStyle()` (BenikUI) and `CreateShadow()` (ElvUI_WindTools) decoration support on skinned embed containers and main backdrop, and guarded `belowTab` anchoring on `chatTab:IsShown()` so BenikUI/WindTools chat layouts never misalign.
+
 ### Fixed
 - **Details! Bar Texture & Class Color Resolution (`Meters/Details.lua`)**: Resolved ElvUI's statusbar texture and font file paths via `LibSharedMedia-3.0` (`row_info.texture_file` & `row_info.font_face_file`) and enforced `texture_class_colors = true` + `RefreshMainWindow(true)` so bars never render solid white.
 - **Details! Embed Sizing & ElvUI Skin (`Meters/Details.lua`)**: Matched `AddOnSkins` embed geometry (`-20px` top toolbar offset, `-13px` statusbar offset, `instance:SetSize(width, innerHeight)`, `SaveMainWindowPosition()` + `RestoreMainWindowPosition()`, and `Details_SwitchButtonFrame`/`DetailsRowFrame` frame levels) so Details! windows fit cleanly inside the ElvUI chat panel without overflowing above it, and applied `ElvUI Frame Style` / `ElvUI Style II` + container backdrop + `row_info` texture/font sync.

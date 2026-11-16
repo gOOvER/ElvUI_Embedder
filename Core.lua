@@ -61,6 +61,21 @@ function EM:GetDB()
 	return E.db.embedder or P.embedder
 end
 
+local function applyThirdPartyDecor(frame)
+	if not frame then return end
+	if frame.BuiStyle and not frame._buiStyled then
+		pcall(frame.BuiStyle, frame)
+		frame._buiStyled = true
+	end
+	if _G.WindTools and not frame.shadow then
+		local W = unpack(_G.WindTools)
+		local S = W and W.GetModule and W:GetModule('Skins', true)
+		if S and S.CreateShadow then
+			pcall(S.CreateShadow, S, frame)
+		end
+	end
+end
+
 function EM:ApplySkinTemplate(frame, db)
 	if not frame or not db or not db.applySkin then return end
 	local template = db.skinTransparent and 'Transparent' or 'Default'
@@ -69,6 +84,7 @@ function EM:ApplySkinTemplate(frame, db)
 	elseif E.SetTemplate then
 		E:SetTemplate(frame, template)
 	end
+	applyThirdPartyDecor(frame)
 end
 
 function EM:ResolveAdapter(choice)
@@ -144,7 +160,7 @@ function EM:UpdateLayout()
 
 	self.Main:SetParent(chatPanel)
 	self.Main:ClearAllPoints()
-	if db.belowTab and chatTab then
+	if db.belowTab and chatTab and chatTab:IsShown() then
 		self.Main:SetPoint('TOPRIGHT', chatTab, 'BOTTOMRIGHT', 0, -1)
 	else
 		self.Main:SetPoint('TOPRIGHT', chatPanel, 'TOPRIGHT', 0, 0)
@@ -153,8 +169,11 @@ function EM:UpdateLayout()
 
 	if db.backdrop then
 		self.Main:SetTemplate(db.transparent and 'Transparent' or 'Default')
+		applyThirdPartyDecor(self.Main)
 	else
 		self.Main:SetBackdrop(nil)
+		if self.Main.shadow then self.Main.shadow:Hide() end
+		if self.Main.style then self.Main.style:Hide() end
 	end
 
 	local width = math_max(100, self.Main:GetWidth() or 400)
